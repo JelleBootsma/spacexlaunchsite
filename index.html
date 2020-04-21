@@ -3,27 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="css/launchsite.css">
+
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="js/bootstrap.js"></script>
+
 
 </head>
-<body>
+<body class="">
 <script defer src="js/main.js" type="module"></script>
 
 
 <div id="launchesApp">
-    <div class="row">
-        <div style="border: 3px solid black" class= "col-md-4" v-for="launch in launches">
-            launchDate: {{ launch.launch_date_utc }},
-            Rocket type: {{ launch.rocket.rocket_name }},
-            <img v-if="launch.links.flickr_images[0]" style="width: 100%;" v-bind:src="launch.links.flickr_images[0]"/>
-            <div v-else>No image available</div>
-            Description: {{launch.details}}
+    <div class="container">
+        <div class="">
+        <div class= "card teal"
+             v-for="launch in launches">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" v-if="launch.links.flickr_images[0]" v-bind:src="launch.links.flickr_images[0]">
+                <img class="activator" v-else style="height: 100px">
+
+            </div>
+            <div class="card-content white-text">
+                <span class="card-title activator">{{ launch.launch_date_utc.substring(0,10) }}</span>
+
+            </div>
+            <div class="card-reveal">
+                <span class="card-title">{{ launch.launch_date_utc }}</span>
+                <p>Rocket type: {{ launch.rocket.rocket_name }}</p>
+                <p>Description: {{launch.details}}</p>
+            </div>
+            </div>
+        </div>
         </div>
     </div>
 </div>
+
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>
