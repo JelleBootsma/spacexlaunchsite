@@ -1,4 +1,7 @@
 .launchCard{
-    background-size: cover;
-    height:750px;
+    -webkit-transition: all .8s ease;
+    -moz-transition: all .8s ease;
+    -ms-transition: all .8s ease;
+    -o-transition: all .8s ease;
+    transition: all .8s ease;
 }
