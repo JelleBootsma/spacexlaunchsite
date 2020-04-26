@@ -6,22 +6,51 @@ import { executeGraphQLQuery } from "./fetch.js";
  * @param myArray {Array} array to split
  * @param chunk_size {Integer} Size of every group
  */
-function chunkArray(myArray, chunk_count){
-    let index = 0;
-    let arrayLength = myArray.length;
+function Split4withRelHeight(myArray){
+    let totalRelativeHeight = getTotalRelHeight(myArray);
+    let columnHeight = Math.ceil(totalRelativeHeight/4);
+    let resultArray = [];
     let tempArray = [];
-    let chunk_size = Math.ceil(arrayLength/chunk_count)
+    let tempRelHeight = 0;
+    //Assume panel with picture is 6x heigth of panel without picture
 
-    for (index = 0; index < arrayLength; index += chunk_size) {
-        let myChunk = myArray.slice(index, index+chunk_size);
-        // Do something if you want with the group
-        tempArray.push(myChunk);
+
+
+    for (var index = 0; index < myArray.length; index++) {
+        let launch = myArray[index];
+        tempArray.push(launch);
+        tempRelHeight += launch.relHeight;
+        if (tempRelHeight >= columnHeight){
+            tempRelHeight = 0;
+            resultArray.push([...tempArray]);
+            tempArray = [];
+        }
+
+
     }
+    resultArray.push([...tempArray]);
 
-    return tempArray;
+    return resultArray;
 }
 
-
+/**
+ *
+ * @param myArray
+ */
+function getTotalRelHeight(myArray){
+    let total = 0;
+    for (var i = 0; i < myArray.length; i++){
+        let launch = myArray[i];
+        if (launch.links.flickr_images && launch.links.flickr_images.length > 0){
+            launch.relHeight = 6;
+            total += 6;
+        }else{
+            launch.relHeight = 1;
+            total += 1;
+        }
+    }
+    return total;
+}
 
 var launchesApp = new Vue({
     el: '#launchesApp',
@@ -49,7 +78,7 @@ var launchesApp = new Vue({
                     break;
                 }
             }
-            let launchesSplit = chunkArray(this.launches, 4);
+            let launchesSplit = Split4withRelHeight(this.launches, 4);
             this.launches1 = launchesSplit[0];
             this.launches2 = launchesSplit[1];
             this.launches3 = launchesSplit[2];
@@ -60,7 +89,7 @@ var launchesApp = new Vue({
 })
 
 
-let launchesQuery = '{ launches { rocket { rocket_name rocket_type } links { flickr_images } mission_name details launch_date_utc } }';
+let launchesQuery = '{ launches { rocket { rocket_name rocket_type } links { flickr_images } launch_site { site_name_long} mission_name mission_id details launch_date_utc } }';
 executeGraphQLQuery(launchesQuery).then(function(data){
     launchesApp.updateLaunches(data.data.launches);
     $(document.body).attr('style', '');

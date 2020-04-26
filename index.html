@@ -24,7 +24,7 @@
 <div id="launchesApp">
     <div class="">
         <div class="row">
-            <div class="col s12 m6 l4 xl3">
+            <div class="col s12 m6 l6 xl3">
                 <div v-for= "launch in launches1">
                     <div class="col-content teal card launchCard">
                         <div class="card-image waves-effect waves-block waves-light">
@@ -37,13 +37,16 @@
                         </div>
                         <div class="card-reveal teal lighten-5 teal-text text-darken-3">
                             <span class="card-title">{{ launch.launch_date_utc }}<i class="material-icons right">close</i></span>
+                            <p>Mission id: {{ launch.mission_id }}</p>
+                            <p>Mission name: {{ launch.mission_name }}</p>
+                            <p>Launch site: {{ launch.launch_site.site_name_long }}</p>
                             <p>Rocket type: {{ launch.rocket.rocket_name }}</p>
                             <p>Description: {{launch.details}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col s12 m6 l4 xl3">
+            <div class="col s12 m6 l6 xl3">
                 <div v-for= "launch in launches2">
                     <div class="col-content teal card launchCard">
                         <div class="card-image waves-effect waves-block waves-light">
@@ -56,13 +59,16 @@
                         </div>
                         <div class="card-reveal teal lighten-5 teal-text text-darken-3">
                             <span class="card-title">{{ launch.launch_date_utc }}<i class="material-icons right">close</i></span>
+                            <p>Mission id: {{ launch.mission_id }}</p>
+                            <p>Mission name: {{ launch.mission_name }}</p>
+                            <p>Launch site: {{ launch.launch_site.site_name_long }}</p>
                             <p>Rocket type: {{ launch.rocket.rocket_name }}</p>
                             <p>Description: {{launch.details}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col s12 m6 l4 xl3">
+            <div class="col s12 m6 l6 xl3">
                 <div v-for= "launch in launches3">
                     <div class="col-content teal card launchCard">
                         <div class="card-image waves-effect waves-block waves-light">
@@ -75,13 +81,16 @@
                         </div>
                         <div class="card-reveal teal lighten-5 teal-text text-darken-3">
                             <span class="card-title">{{ launch.launch_date_utc }}<i class="material-icons right">close</i></span>
+                            <p>Mission id: {{ launch.mission_id }}</p>
+                            <p>Mission name: {{ launch.mission_name }}</p>
+                            <p>Launch site: {{ launch.launch_site.site_name_long }}</p>
                             <p>Rocket type: {{ launch.rocket.rocket_name }}</p>
                             <p>Description: {{launch.details}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col s12 m6 l4 xl3">
+            <div class="col s12 m6 l6 xl3">
                 <div v-for= "launch in launches4">
                     <div class="col-content teal card launchCard">
                         <div class="card-image waves-effect waves-block waves-light">
@@ -94,6 +103,9 @@
                         </div>
                         <div class="card-reveal teal lighten-5 teal-text text-darken-3">
                             <span class="card-title">{{ launch.launch_date_utc }}<i class="material-icons right">close</i></span>
+                            <p>Mission id: {{ launch.mission_id }}</p>
+                            <p>Mission name: {{ launch.mission_name }}</p>
+                            <p>Launch site: {{ launch.launch_site.site_name_long }}</p>
                             <p>Rocket type: {{ launch.rocket.rocket_name }}</p>
                             <p>Description: {{launch.details}}</p>
                         </div>
