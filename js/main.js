@@ -33,6 +33,18 @@ function Split4withRelHeight(myArray){
     return resultArray;
 }
 
+function isScrolledIntoView(el) {
+    var rect = el.getBoundingClientRect();
+    var elemTop = rect.top;
+    var elemBottom = rect.bottom;
+
+    // Only completely visible elements return true:
+    var isVisible = (elemBottom <= window.innerHeight);
+    // Partially visible elements return true:
+    //isVisible = elemTop < window.innerHeight && elemBottom >= 0;
+    return isVisible;
+}
+
 /**
  *
  * @param myArray
@@ -55,13 +67,17 @@ function getTotalRelHeight(myArray){
 var launchesApp = new Vue({
     el: '#launchesApp',
     data: {
-        launches: [
-        ],
+        initialLoaded: false,
+        launches: [[],[],[],[]],
+        allLaunches: [],
         launches1: [],
         launches2: [],
         launches3: [],
         launches4: [],
-        backgroundPicture: null
+        allLaunches1: [],
+        allLaunches2: [],
+        allLaunches3: [],
+        allLaunches4: []
     },
     mounted: function (newLaunches) {
         this.updateLaunches(newLaunches);
@@ -70,20 +86,22 @@ var launchesApp = new Vue({
         updateLaunches: function (newLaunches) {
             if (newLaunches == undefined) return;
             newLaunches.sort((a, b) => (a.launch_date_utc > b.launch_date_utc) ? -1 : 1)
-            this.launches = newLaunches;
-            let pic;
-            for (pic in newLaunches) {
-                if (newLaunches[pic].links.flickr_images[0]){
-                    this.backgroundPicture = newLaunches[pic].links.flickr_images[0];
-                    break;
-                }
+            this.allLaunches = newLaunches;
+            let launchesSplit = Split4withRelHeight(this.allLaunches, 4);
+            this.allLaunches = launchesSplit;
+            for (let i = 0; i < 4; i++){
+                this.AddCards(i);
             }
-            let launchesSplit = Split4withRelHeight(this.launches, 4);
-            this.launches1 = launchesSplit[0];
-            this.launches2 = launchesSplit[1];
-            this.launches3 = launchesSplit[2];
-            this.launches4 = launchesSplit[3];
+            this.initialLoaded = true;
 
+
+        },
+        AddCards: function (col) {
+            let toAdd = 24;
+            while (toAdd > 0 && this.launches[col].length < this.allLaunches[col].length){
+                toAdd -= this.allLaunches[col][this.launches[col].length].relHeight;
+                this.launches[col].push(this.allLaunches[col][this.launches[col].length]);
+            }
         }
     }
 })
@@ -95,4 +113,15 @@ executeGraphQLQuery(launchesQuery).then(function(data){
     $(document.body).attr('style', '');
     $(document.body).addClass('lime');
     $(document.body).addClass('lighten-5');
+});
+
+$(document).ready(function(){
+    $(window).scroll(function(){
+        for (let i = 0; i < 4; i++){
+            let columnDOM = document.getElementById("launchColumn" + (i +1));
+            if (launchesApp.initialLoaded == true && isScrolledIntoView(columnDOM)){
+                launchesApp.AddCards(i);
+            }
+        }
+    });
 });

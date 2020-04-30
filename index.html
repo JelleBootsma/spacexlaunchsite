@@ -24,8 +24,8 @@
 <div id="launchesApp">
     <div class="">
         <div class="row">
-            <div class="col s12 m6 l6 xl3">
-                <div v-for= "launch in launches1">
+            <div id="launchColumn1" class="col s12 m6 l6 xl3">
+                <div v-for= "launch in launches[0]">
                     <div class="col-content teal card launchCard">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" v-if="launch.links.flickr_images[0]" v-bind:src="launch.links.flickr_images[0]">
@@ -46,8 +46,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col s12 m6 l6 xl3">
-                <div v-for= "launch in launches2">
+            <div id="launchColumn2" class="col s12 m6 l6 xl3">
+                <div v-for= "launch in launches[1]">
                     <div class="col-content teal card launchCard">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" v-if="launch.links.flickr_images[0]" v-bind:src="launch.links.flickr_images[0]">
@@ -68,8 +68,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col s12 m6 l6 xl3">
-                <div v-for= "launch in launches3">
+            <div id="launchColumn3" class="col s12 m6 l6 xl3">
+                <div v-for= "launch in launches[2]">
                     <div class="col-content teal card launchCard">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" v-if="launch.links.flickr_images[0]" v-bind:src="launch.links.flickr_images[0]">
@@ -90,8 +90,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col s12 m6 l6 xl3">
-                <div v-for= "launch in launches4">
+            <div id="launchColumn4" class="col s12 m6 l6 xl3">
+                <div v-for= "launch in launches[3]">
                     <div class="col-content teal card launchCard">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" v-if="launch.links.flickr_images[0]" v-bind:src="launch.links.flickr_images[0]">
