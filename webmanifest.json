@@ -1,0 +1,16 @@
+{
+  "background_color": "black",
+  "description": "List of SpaceX launches",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "spacex.png",
+      "sizes": "600x600",
+      "type": "image/png"
+    }
+  ],
+  "name": "SpaceX Launches",
+  "short_name": "SpaceX",
+  "start_url": "index.html",
+  "scope": "."
+}
